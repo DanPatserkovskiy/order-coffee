@@ -43,7 +43,25 @@ beveragesList.addEventListener('click', (e) => {
 
 orderForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    const count = document.querySelectorAll('.beverage').length;
+    const beverages = document.querySelectorAll('.beverage');
+    const tableBody = document.getElementById('table-body');
+    tableBody.innerHTML = ''; 
+    beverages.forEach((bev) => {
+        const drink = bev.querySelector('select option:checked').text;
+        const milkInput = bev.querySelector('input[type="radio"]:checked');
+        const milk = milkInput ? milkInput.parentElement.textContent.trim() : 'обычное';
+        const extras = Array.from(bev.querySelectorAll('input[type="checkbox"]:checked'))
+            .map(cb => cb.parentElement.textContent.trim())
+            .join(', ');
+        const row = `<tr>
+            <td>${drink}</td>
+            <td>${milk}</td>
+            <td>${extras || '—'}</td>
+        </tr>`;
+        tableBody.insertAdjacentHTML('beforeend', row);
+    });
+
+    const count = beverages.length;
     modalMessage.textContent = `Вы заказали ${count} ${getWordForm(count)}`;
     modal.classList.remove('hidden');
 });

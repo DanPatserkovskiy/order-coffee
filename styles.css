@@ -99,3 +99,19 @@
 .hidden {
     display: none !important;
 }
+
+#order-summary-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+#order-summary-table th, #order-summary-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+#order-summary-table th {
+    background-color: #f2f2f2;
+}
